@@ -13,17 +13,19 @@
 
 <body>
     <div class="container">
-        <div style="margin-top: 20px;">
-            <h1>Bảng xếp hạng giải Bắn Cung</h1>
+
+    <!-- //Thêm, Sửa, Danh sách -->
+        <div style="margin: 30px 0 10px 0; text-align: center;">
+            <h1>Bảng xếp hạng</h1>
         </div>
-        <!-- <a href="{{ route('rating_members.create') }}">Create New Rating Member</a> -->
+        <!-- <a href="{{ route('members.create') }}">Create New Rating Member</a> -->
         <table class="table">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Thứ hạng</th>
                     <th scope="col">Người chơi</th>
                     <th scope="col">Số trận</th>
-                    <th scope="col">T-H-B</th>
+                    <th scope="col">Thắng | Thua</th>
                     <th scope="col">Điểm</th>
                     <th scope="col">Ghi chú</th>
                 </tr>
@@ -34,7 +36,7 @@
                 $count = 1;
             @endphp
 
-                @foreach ($rating_members as $ratingMember)
+                @foreach ($members as $members)
                   <tr>
                     @if ($count == 1)
                             <td scope="row"><span class="rank-icon gold"><i class="fas fa-trophy"></i></span>{{$i++}}</td>
@@ -48,22 +50,13 @@
                             <td scope="row"><span class="rank-icon"><i class="fas fa-star"></i></span>{{$i++}}</td>
                     @endif
                         <td>
-                            <img src="{{ asset('uploads/rating_members/'.$ratingMember->images) }}" width="70px" height="50px" alt="Image">
-                            <div style="float: right; width: 65%; text-align: left;"><span>{{ $ratingMember->name }}</span></div>
+                            <img src="{{ asset('uploads/members/'.$members->images) }}" width="70px" height="50px" alt="Image">
+                            <div style="float: right; width: 65%; text-align: left;"><span>{{ $members->name }}</span></div>
                         </td>
                         <td>0</td>
-                        <td>0-0-0</td>
-                        <td>{{ $ratingMember->point }}</td>
-                        <td>{{ $ratingMember->note }}</td>
-                        <!-- <td>
-                            <a href="{{ route('rating_members.show', $ratingMember->id) }}">View</a>
-                            <a href="{{ route('rating_members.edit', $ratingMember->id) }}">Edit</a> -->
-                        <!-- <form action="{{ route('rating_members.destroy', $ratingMember->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Delete</button> -->
-                        <!-- </form> -->
-                        <!-- </td> -->
+                        <td>0 | 0</td>
+                        <td>{{ $members->point }}</td>
+                        <td>{{ $members->note }}</td>
                     </tr>
                     @php
                         $count++;

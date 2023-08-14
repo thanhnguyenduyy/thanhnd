@@ -10,19 +10,35 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
-
 // Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', 'RatingMemberController@index')->name('rating_members');;
-Route::get('/create', 'RatingMemberController@create')->name('rating_members.create');
-Route::post('/store', 'RatingMemberController@store')->name('rating_members.store');
-Route::get('/show', 'RatingMemberController@show')->name('rating_members.show');
-Route::get('/edit', 'RatingMemberController@edit')->name('rating_members.edit');
-Route::get('/destroy', 'RatingMemberController@destroy')->name('rating_members.destroy');
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->middleware('admin')->name('register');
 
+Route::get('/', 'MembersController@index')->middleware('device.restriction')->name('members');
+
+Route::prefix('members')->middleware('admin')->group(function () {
+    // danh sách
+    Route::get('/list', 'MembersController@list')->name('members.list');
+    // thêm 
+    Route::get('/create', 'MembersController@create')->name('members.create');
+    Route::post('/store', 'MembersController@store')->name('members.store');
+    // edit
+    Route::get('/edit/{id}', 'MembersController@edit')->name('members.edit');
+    Route::put('/update/{id}', 'MembersController@update')->name('members.update');
+    // xoá
+    Route::get('/destroy/{id}', 'MembersController@destroy')->name('members.destroy');
+});
+
+Route::prefix('results')->middleware('admin')->group(function () {
+   // danh sách
+   Route::get('/list', 'ResultsController@list')->name('results.list');
+   // thêm
+   Route::get('/create', 'ResultsController@create')->name('results.create');
+   Route::post('/store', 'ResultsController@store')->name('results.store');
+   // edit
+   Route::get('/edit/{id}', 'ResultsController@edit')->name('results.edit');
+   Route::put('/update/{id}', 'ResultsController@update')->name('results.update');
+   // xoá
+   Route::get('/destroy/{id}', 'ResultsController@destroy')->name('results.destroy');
+});

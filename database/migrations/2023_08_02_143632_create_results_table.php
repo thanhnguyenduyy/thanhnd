@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRatingMembersTable extends Migration
+class CreateResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateRatingMembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('rating_members', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('images');
-            $table->integer('point');
+            $table->integer('id_member');
+            $table->integer('round_matches'); // vòng đấu
+            $table->integer('number_matches'); // số trận đấu
+            $table->integer('point'); // điểm
+            $table->string('result'); // thắng || thua
             $table->string('note')->nullable();
-            $table->string('delete_flg')->default(0);
             $table->timestamps();
+            
         });
     }
 
@@ -31,6 +33,6 @@ class CreateRatingMembersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rating_members');
+        Schema::dropIfExists('results');
     }
 }

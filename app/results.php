@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class rating_member extends Model
+class results extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,6 +12,6 @@ class rating_member extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'images', 'point', 'note', 'delete_flg',
+        'id', 'id_member', 'round_matches', 'number_matches', 'point', 'result', 'note'
     ];
 }
