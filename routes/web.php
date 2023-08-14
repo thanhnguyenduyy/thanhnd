@@ -13,7 +13,7 @@
 Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->middleware('admin')->name('register');
+// Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->middleware('admin')->name('register');
 
 Route::get('/', 'MembersController@index')->middleware('device.restriction')->name('members');
 
